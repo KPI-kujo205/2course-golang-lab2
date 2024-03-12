@@ -16,6 +16,11 @@ var (
 func main() {
 	flag.Parse()
 
+	if *inputExpression != "" && *inputExpresionFile != "" {
+		panic("Only one flag available: -e or -f")
+	}
+
+	fmt.Println(*inputExpression, *inputExpresionFile, *outputFile) // test
 	// TODO: Change this to accept input from the command line arguments as described in the task and
 	//       output the results using the ComputeHandler instance.
 	//       handler := &lab2.ComputeHandler{
