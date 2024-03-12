@@ -3,12 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
+
 	lab2 "github.com/roman-mazur/architecture-lab-2"
 )
 
 var (
-	inputExpression = flag.String("e", "", "Expression to compute")
-	// TODO: Add other flags support for input and output configuration.
+	inputExpression    = flag.String("e", "", "Expression to compute")
+	inputExpresionFile = flag.String("f", "", "Path to input expression file")
+	outputFile         = flag.String("o", "", "Path to output file")
 )
 
 func main() {
