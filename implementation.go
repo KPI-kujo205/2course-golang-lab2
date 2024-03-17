@@ -2,24 +2,28 @@ package lab2
 
 import (
 	"errors"
-	"strings"
 	"regexp"
+	"strings"
 )
 
+// PrefixToPostfix function takes an input string representing a prefix expression and converts it to a postfix expression.
+// The function splits the input string into tokens and then iterates through those tokens in reverse order.
+// If the token is an operand, it is added to the stack.
+// If the token is an operator, it pops two operands from the stack, applies the operator to those operands, and pushes the result back onto the stack.
+// At the end of the process, only one element remains on the stack - the result of the postfix expression.
 func PrefixToPostfix(input string) (string, error) {
 	trimmedInput := strings.TrimSpace(input)
 	if trimmedInput == "" {
 		return "", errors.New("input string contains only whitespace characters")
 	}
 
-	stack := []string{}
+	var stack []string
 	tokens := strings.Fields(input)
 
 	for i := len(tokens) - 1; i >= 0; i-- {
 		token := tokens[i]
-	
 
-		if(!isNumber(token) && !isOperator(token[0])){
+		if !isNumber(token) && !isOperator(token[0]) {
 			return "", errors.New("invalid character")
 		}
 
@@ -41,7 +45,6 @@ func PrefixToPostfix(input string) (string, error) {
 	return stack[0], nil
 }
 
-
 func isNumber(input string) bool {
 	pattern := `^[+-]?\d*\.?\d+$`
 	re := regexp.MustCompile(pattern)
@@ -52,4 +55,3 @@ func isNumber(input string) bool {
 func isOperator(ch byte) bool {
 	return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^'
 }
-
